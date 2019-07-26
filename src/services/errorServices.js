@@ -18,3 +18,7 @@ export function fetchErrors(searchTerm) {
       };
   }
 } 
+
+export function sendNewError({ title, errCode, description, solution, tags }) {
+  return { title, errCode, description, solution, tags };
+}
