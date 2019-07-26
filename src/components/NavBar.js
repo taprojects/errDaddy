@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NavStyle } from './Nav';
+import { setSearchTerm } from '../actions/getErrs';
+
 
 class NavBar extends PureComponent {
   static propTypes = {
+    onSubmit: PropTypes.func.isRequired
   };
 
   state = {
@@ -15,6 +19,13 @@ class NavBar extends PureComponent {
       this.setState({ [target.name]: target.value });
     }
 
+    handleSubmit = event => {
+      event.preventDefault();
+      const { searchTerm } = this.state;
+      this.props.onSubmit(searchTerm);
+      this.setState({ searchTerm: '' });
+    }
+
     render() {
 
       return (
@@ -22,13 +33,15 @@ class NavBar extends PureComponent {
           <Link to={'/'}>
             <h1>errDaddy</h1>
           </Link>
-          <div>
+
+          <form onSubmit={this.handleSubmit}>
             <button>search</button>
             <input type="text" placeholder="most recent" id="search-term" name="searchTerm" onChange={this.handleChange}/>
-            <Link to={'/newErr'}>
-              <p>new err</p>
-            </Link>
-          </div>
+          </form>
+
+          <Link to={'/newErr'}>
+            <p>new err</p>
+          </Link>
         </NavStyle>
       );
     }
@@ -38,13 +51,13 @@ class NavBar extends PureComponent {
 
 // });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   fetch(searchTerm) {
-//     dispatch(getErrPosts(searchTerm));
-//   }
-// });
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(searchTerm) {
+    dispatch(setSearchTerm(searchTerm));
+  }
+});
 
 export default connect(
-  // mapStateToProps,
-  // mapDispatchToProps
+  null,
+  mapDispatchToProps
 )(NavBar);

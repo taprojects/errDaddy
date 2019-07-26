@@ -20,7 +20,7 @@ const NavStyle = styled.nav `
     margin-right: 10px;
   }
   
-  div {
+  form {
     display: flex;
     align-items: center;
   }
