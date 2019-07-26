@@ -7,7 +7,7 @@ describe('depend function', () => {
 
     const result = numGoodSpans(good, bad);
 
-    expect(result).toEqual(7); 
+    expect(result).toEqual(70); 
   });
 
   it('4 good and 2 bad', () => {
@@ -16,7 +16,7 @@ describe('depend function', () => {
 
     const result = numGoodSpans(good, bad);
 
-    expect(result).toEqual(7); 
+    expect(result).toEqual(67); 
   });
 });
 
