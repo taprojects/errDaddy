@@ -12,7 +12,7 @@ export default function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={ErrContainer} />
-        {/* <Route exact path="/newErr" component={NewErr} /> */}
+        <Route exact path="/newErr" component={NewErr} />
       </Switch>
 
     </Router>

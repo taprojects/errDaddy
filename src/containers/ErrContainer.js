@@ -21,10 +21,7 @@ class ErrContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.fetch(this.props.searchTerm);
-  } 
-
-  componentDidUpdate() {
+    this.props.fetch(this.props.searchTerm || 'recent');
   } 
 
   handleChange = ({ target }) => {
@@ -34,17 +31,18 @@ class ErrContainer extends PureComponent {
   handleSubmit = event => {
     event.preventDefault();
     const { searchTerm } = this.state;
-    this.props.onSubmit(searchTerm);
-    this.props.fetch(searchTerm);
+    this.props.onSubmit(searchTerm || 'recent');
+    this.props.fetch(searchTerm || 'recent');
     this.setState({ searchTerm: '' });
   }
 
   render() {
-    const { errors } = this.props;
+    const { errors, searchTerm } = this.props;
 
     return (
       <>
         <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <h2> &gt; {searchTerm || 'recent'}</h2>
         <ErrList errs={errors} />
       </>
     );
@@ -52,7 +50,7 @@ class ErrContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  searchTerm: selectSearchTerm(state),
+  searchTerm: selectSearchTerm(state) || '',
   errors: selectErrors(state)
 });
 

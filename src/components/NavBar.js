@@ -11,8 +11,8 @@ function NavBar({ handleChange, handleSubmit }) {
       </Link>
 
       <form onSubmit={handleSubmit}>
-        <button><Link to={'/'}>search</Link></button>
-        <input type="text" placeholder="most recent" id="search-term" name="searchTerm" onChange={handleChange}/>
+        <button>search</button>
+        <input type="text" id="search-term" name="searchTerm" onChange={handleChange}/>
       </form>
 
       <Link to={'/newErr'}>
