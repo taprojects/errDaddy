@@ -46,6 +46,8 @@ class NewErr extends PureComponent {
       tags
     } = this.state;
     this.props.onFormSubmit({ title, errCode, description, solution, tags });
+    this.props.history.push('/displayErr');
+
   }
 
   render() {
@@ -65,8 +67,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setSearchTerm(searchTerm));
   },
   onFormSubmit({ title, errCode, description, solution, tags }) {
-    console.log(title, errCode, description, solution, tags);
-    // dispatch new err to database
     dispatch(createNewError({ title, errCode, description, solution, tags }));
   }
 });

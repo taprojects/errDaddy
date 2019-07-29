@@ -1,28 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ErrList from '../components/errs/ErrList';
 import NavBar from '../components/nav/NavBar';
 import { getErrors } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
-import { selectErrors } from '../selectors/errSelectors';
-import { selectSearchTerm } from '../selectors/searchTermSelector';
-
-class ErrContainer extends PureComponent {
+import { selectNewError } from '../selectors/errSelectors';
+ 
+class DisplayError extends PureComponent {
   static propTypes = {
     fetch: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    searchTerm: PropTypes.string.isRequired,
-    errors: PropTypes.array.isRequired
+    displayError: PropTypes.object,
+    history: PropTypes.object.isRequired
+
   };
-
-  state = {
-    searchTerm: ''
-  }
-
-  componentDidMount() {
-    this.props.fetch(this.props.searchTerm || 'recent');
-  } 
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -34,24 +25,39 @@ class ErrContainer extends PureComponent {
     this.props.onSubmit(searchTerm || 'recent');
     this.props.fetch(searchTerm || 'recent');
     this.setState({ searchTerm: '' });
+    this.props.history.push('/');
+
   }
 
   render() {
-    const { errors, searchTerm } = this.props;
+    const dumbyErr = {
+      description: 'thing about me problem',
+      errCode: 'err404',
+      solution: 'heres how i fixed that thing',
+      tags: '#javascript #bc1 #forms',
+      title: 'title',
+      good: 5,
+      bad: 1
+    };
+
+    
+    const { title, errCode, description, solution, tags } = this.props.displayError || dumbyErr;
 
     return (
       <>
         <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <h2> &gt; {searchTerm || 'recent'}</h2>
-        <ErrList errs={errors} />
+        <h2>{title}</h2>
+        <p>{errCode}</p>
+        <p>{description}</p>
+        <p>{solution}</p>
+        <p>{tags}</p>
       </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  searchTerm: selectSearchTerm(state) || '',
-  errors: selectErrors(state)
+  displayError: selectNewError(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -66,4 +72,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ErrContainer);
+)(DisplayError);

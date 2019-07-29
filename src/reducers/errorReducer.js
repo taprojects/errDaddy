@@ -11,7 +11,7 @@ const initialState = {
   errorList: [],
   loading: false,
   err: {},
-  newError: {}
+  displayError: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: false, error: action.payload };
       // new error *****************
     case CREATE_ERROR: 
-      return { ...state, newError: action.payload };
+      return { ...state, displayError: action.payload };
     case CREATE_ERROR_PENDING:
       return { ...state, loading: true };
     case CREATE_ERROR_ERROR:

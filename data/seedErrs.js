@@ -1,19 +1,31 @@
 const err1 = {
   title: 'quick check for existing item in array with .includes',
-  good: 9,
-  bad: 2
+  description: 'thing about me problem',
+  errCode: 'err404',
+  solution: 'heres how i fixed that thing',
+  tags: '#javascript #bc1 #forms',
+  good: 5,
+  bad: 1
 };
 
 const err2 = {
   title: 'fixed a query selector on radio buttons',
-  good: 14,
+  description: 'thing about me problem',
+  errCode: 'err404',
+  solution: 'heres how i fixed that thing',
+  tags: '#javascript #bc1 #forms',
+  good: 5,
   bad: 1
 };
 
 const err3 = {
   title: 'for loop problem with my increment',
-  good: 2,
-  bad: 11
+  description: 'thing about me problem',
+  errCode: 'err404',
+  solution: 'heres how i fixed that thing',
+  tags: '#javascript #bc1 #forms',
+  good: 5,
+  bad: 1
 };
 
 
