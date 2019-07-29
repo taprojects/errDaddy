@@ -16,7 +16,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
-    // get errors *****************
     case GET_ERRORS: 
       return { ...state, errorList: action.payload };
     case GET_ERRORS_PENDING:
