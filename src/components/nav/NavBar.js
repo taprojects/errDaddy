@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { NavStyle } from '../../styles/nav.style';
+import DataList from './DataList';
 
-function NavBar({ handleChange, handleSubmit }) {
+function NavBar({ handleChange, handleSubmit, tagArr }) {
   return (
     <NavStyle>
       <Link to={'/search/recent'}>
@@ -14,10 +15,7 @@ function NavBar({ handleChange, handleSubmit }) {
         
         <button>search</button>
         <input list="tagList" id="search-term" name="searchTerm" onChange={handleChange}/>
-        <datalist id="tagList">
-          <option value="Boston" />
-          <option value="Cambridge" />
-        </datalist>
+        <DataList tagArr={tagArr} />
       </form>
 
       <Link to={'/newErr'}>
@@ -29,7 +27,8 @@ function NavBar({ handleChange, handleSubmit }) {
 
 NavBar.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  tagArr: PropTypes.array.isRequired
 };
 
 export default NavBar;

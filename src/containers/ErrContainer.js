@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ErrList from '../components/errs/ErrList';
 import NavBar from '../components/nav/NavBar';
-import { getErrors } from '../actions/errorActions';
+import { getErrors, getAllTags } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
-import { selectErrors } from '../selectors/errSelectors';
+import { selectErrors, selectTags } from '../selectors/errSelectors';
 
 class ErrContainer extends PureComponent {
   static propTypes = {
     fetch: PropTypes.func.isRequired,
+    fetchTags: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     errors: PropTypes.array.isRequired,
     history: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    tags: PropTypes.array
   };
 
   state = {
@@ -23,9 +25,11 @@ class ErrContainer extends PureComponent {
   componentDidMount() {
     this.setState({ searchTerm: this.props.match.params.searchTerm });
     this.props.fetch(this.props.match.params.searchTerm);
+    this.props.fetchTags();
   } 
-
+  
   componentDidUpdate() {
+    if(this.props.tags.length === 0) this.props.fetchTags();
     if(this.props.errors.length === 0) this.props.fetch(this.props.match.params.searchTerm);
   }
 
@@ -42,21 +46,25 @@ class ErrContainer extends PureComponent {
   }
 
   render() {
-    const { errors } = this.props;
+    const { errors, tags } = this.props;
     const searchTerm = this.props.match.params.searchTerm;
 
-    return (
-      <>
-        <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+    if(errors && tags) {
+      return (
+        <>
+        <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} tagArr={this.props.tags}/>
         <h2> &gt; {searchTerm || 'recent'}</h2>
         <ErrList errs={errors} />
       </>
-    );
+      );
+    }
+    return <h2>Loading...</h2>;
   }
 }
 
 const mapStateToProps = state => ({
-  errors: selectErrors(state)
+  errors: selectErrors(state),
+  tags: selectTags(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -65,6 +73,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSubmit(searchTerm) {
     dispatch(setSearchTerm(searchTerm));
+  },
+  fetchTags() {
+    dispatch(getAllTags());
   }
 });
 

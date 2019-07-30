@@ -1,5 +1,10 @@
 import { createAction } from 'promise-middleware-redux';
-import { fetchErrors, fetchErrorDetail, sendNewError } from '../services/errorServices';
+import { 
+  fetchErrors, 
+  fetchErrorDetail, 
+  sendNewError, 
+  fetchAllTags 
+} from '../services/errorServices';
 
 export const [
   getErrors,
@@ -21,6 +26,13 @@ export const [
   GET_DISPLAY_ERROR_PENDING,
   GET_DISPLAY_ERROR_ERROR
 ] = createAction('GET_DISPLAY_ERROR', fetchErrorDetail);
+
+export const [
+  getAllTags,
+  GET_ALL_TAGS,
+  GET_ALL_TAGS_PENDING,
+  GET_ALL_TAGS_ERROR
+] = createAction('GET_ALL_TAGS', fetchAllTags);
 
 
 

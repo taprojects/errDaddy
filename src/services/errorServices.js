@@ -31,3 +31,13 @@ export function sendNewError({ title, description, solution, tags }) {
       return json;
     });
 }
+
+export function fetchAllTags() {
+  return ['input', 'react', 'javascript', 'new tag'];
+  // return fetch(`http://${API_HOST}/api/v1/error/allTags`)
+  //   .then(res => ([res.ok, res.json()]))
+  //   .then(([ok, json]) => {
+  //     if(!ok) throw 'Unable to fetch';
+  //     return json;
+  //   });
+}
