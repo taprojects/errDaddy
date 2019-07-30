@@ -43,9 +43,11 @@ class NewErr extends PureComponent {
       solution,
       tags
     } = this.state;
+
+
+
     this.props.onFormSubmit({ title, description, solution, tags });
-    // this.props.history.push('/displayErr');
-    console.log(title, description, solution, tags);
+    this.props.history.push('/displayErr');
 
   }
 

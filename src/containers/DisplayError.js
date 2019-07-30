@@ -23,7 +23,8 @@ class DisplayError extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.fetchDisplay(this.props.match.params.errId);
+    const errId = this.props.match.params.errId;
+    if(errId) this.props.fetchDisplay(errId);
   }
 
   handleChange = ({ target }) => {
@@ -36,7 +37,6 @@ class DisplayError extends PureComponent {
     this.props.onSubmit(searchTerm);
     this.props.fetch(searchTerm);
     this.props.history.push(`/search/${searchTerm}`);
-
   }
 
   render() {

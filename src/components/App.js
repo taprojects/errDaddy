@@ -15,6 +15,7 @@ export default function App() {
         <Route path="/search/:searchTerm" component={ErrContainer} />
         <Route path="/newErr" component={NewErr} />
         <Route path="/displayErr/:errId" component={DisplayError} />
+        <Route path="/displayErr" component={DisplayError} />
       </Switch>
 
     </Router>
