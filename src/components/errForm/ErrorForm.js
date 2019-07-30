@@ -7,7 +7,6 @@ function ErrorForm({ handleFormSubmit, handleChange }) {
     <FormStyle>
       <form onSubmit={handleFormSubmit}>
         <input id='title' type="text" name="title" onChange={handleChange} placeholder='title for err' />
-        <input id='errCode' type="text" name="errCode" onChange={handleChange} placeholder='error' />
         <textarea id='description' type="text" name="description" onChange={handleChange} placeholder='description' />
         <textarea id='solution' type="text" name="solution" onChange={handleChange} placeholder='solution' />
         <textarea id='tags' type="text" name="tags" onChange={handleChange} placeholder='tags' />

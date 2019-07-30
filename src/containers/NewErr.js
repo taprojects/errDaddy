@@ -39,13 +39,13 @@ class NewErr extends PureComponent {
     event.preventDefault();
     const {
       title,
-      errCode,
       description,
       solution,
       tags
     } = this.state;
-    this.props.onFormSubmit({ title, errCode, description, solution, tags });
-    this.props.history.push('/displayErr');
+    this.props.onFormSubmit({ title, description, solution, tags });
+    // this.props.history.push('/displayErr');
+    console.log(title, description, solution, tags);
 
   }
 
@@ -65,8 +65,8 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit(searchTerm) {
     dispatch(setSearchTerm(searchTerm));
   },
-  onFormSubmit({ title, errCode, description, solution, tags }) {
-    dispatch(createNewError({ title, errCode, description, solution, tags }));
+  onFormSubmit({ title, description, solution, tags }) {
+    dispatch(createNewError({ title, description, solution, tags }));
   }
 });
 

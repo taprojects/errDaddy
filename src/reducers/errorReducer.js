@@ -5,7 +5,6 @@ import {
   CREATE_ERROR,
   CREATE_ERROR_PENDING,
   CREATE_ERROR_ERROR,
-  getDisplayError,
   GET_DISPLAY_ERROR,
   GET_DISPLAY_ERROR_PENDING,
   GET_DISPLAY_ERROR_ERROR
@@ -19,6 +18,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  console.log(action);
   switch(action.type) {
     // get error list *****************
     case GET_ERRORS: 
