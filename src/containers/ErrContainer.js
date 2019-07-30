@@ -3,25 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ErrList from '../components/errs/ErrList';
 import NavBar from '../components/nav/NavBar';
-import { getErrors, setErrId } from '../actions/errorActions';
+import { getErrors } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import { selectErrors } from '../selectors/errSelectors';
-import { selectSearchTerm } from '../selectors/searchTermSelector';
 
 class ErrContainer extends PureComponent {
   static propTypes = {
     fetch: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    searchTerm: PropTypes.string.isRequired,
-    errors: PropTypes.array.isRequired
+    errors: PropTypes.array.isRequired,
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
   };
 
   state = {
-    searchTerm: ''
+    searchTerm: this.props.match.params.searchTerm
   }
 
   componentDidMount() {
-    this.props.fetch(this.props.searchTerm || 'recent');
+    this.setState({ searchTerm: this.props.match.params.searchTerm });
+    this.props.fetch(this.props.match.params.searchTerm);
   } 
 
   handleChange = ({ target }) => {
@@ -33,11 +34,12 @@ class ErrContainer extends PureComponent {
     const { searchTerm } = this.state;
     this.props.onSubmit(searchTerm || 'recent');
     this.props.fetch(searchTerm || 'recent');
-    this.setState({ searchTerm: '' });
+    this.props.history.push(`/search/${searchTerm}`);
   }
 
   render() {
-    const { errors, searchTerm } = this.props;
+    const { errors } = this.props;
+    const searchTerm = this.props.match.params.searchTerm;
 
     return (
       <>
@@ -50,7 +52,6 @@ class ErrContainer extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  searchTerm: selectSearchTerm(state) || '',
   errors: selectErrors(state)
 });
 

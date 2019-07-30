@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { NavStyle } from './navStyle';
+import { NavStyle } from '../../styles/nav.style';
 
 function NavBar({ handleChange, handleSubmit }) {
   return (
     <NavStyle>
-      <Link to={'/'}>
+      <Link to={'/search/recent'}>
         <h1>errDaddy</h1>
       </Link>
 
       <form onSubmit={handleSubmit}>
         <button>search</button>
-        <input type="text" id="search-term" name="searchTerm" defaultValue="recent" onChange={handleChange}/>
+        <input type="text" id="search-term" name="searchTerm" onChange={handleChange}/>
       </form>
 
       <Link to={'/newErr'}>

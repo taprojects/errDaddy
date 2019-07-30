@@ -36,8 +36,6 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: false, error: action.payload };
       // error detail *****************
     case GET_DISPLAY_ERROR: 
-      console.log(action.payload);
-
       return { ...state, displayError: action.payload };
     case GET_DISPLAY_ERROR_PENDING:
       return { ...state, loading: true };

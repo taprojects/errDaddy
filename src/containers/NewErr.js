@@ -32,8 +32,7 @@ class NewErr extends PureComponent {
     event.preventDefault();
     const { searchTerm } = this.state;
     this.props.onSubmit(searchTerm);
-    this.setState({ searchTerm: '' });
-    this.props.history.push('/');
+    this.props.history.push(`/search/${searchTerm}`);
   }
   
   handleFormSubmit = event => {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainBlue } from './styleVars.style';
 
 const NavStyle = styled.nav `
   display: flex;
@@ -9,7 +10,6 @@ const NavStyle = styled.nav `
   height: 30px;
   
   button {
-    color: blue;
     height: 18px;
     margin-right: 10px;
   }
@@ -27,6 +27,7 @@ const NavStyle = styled.nav `
 
   a {
     text-decoration: none;
+    color: ${mainBlue};
   }
 `;
 

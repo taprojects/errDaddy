@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavBar from '../components/nav/NavBar';
+import Tags from '../components/errs/Tags';
 import { getErrors, getDisplayError } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import { selectDisplay } from '../selectors/errSelectors';
+import { DisplayStyle } from '../styles/DisplayError.style';
  
 class DisplayError extends PureComponent {
   static propTypes = {
@@ -22,7 +24,6 @@ class DisplayError extends PureComponent {
 
   componentDidMount() {
     this.props.fetchDisplay(this.props.match.params.errId);
-    console.log(this.props.displayErr);
   }
 
   handleChange = ({ target }) => {
@@ -34,8 +35,7 @@ class DisplayError extends PureComponent {
     const { searchTerm } = this.state || 'recent';
     this.props.onSubmit(searchTerm);
     this.props.fetch(searchTerm);
-    this.setState({ searchTerm: '' });
-    this.props.history.push('/');
+    this.props.history.push(`/search/${searchTerm}`);
 
   }
 
@@ -43,14 +43,19 @@ class DisplayError extends PureComponent {
 
     const err = this.props.displayErr;
     if(err) {
-      console.log();
       return (
         <>
           <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-          <h2>{err.title}</h2>
-          <p>{err.description}</p>
-          <p>{err.solution}</p>
-          <p>{err.tags}</p>
+          <DisplayStyle>
+            <h2>Title:</h2>
+            <p>{err.title}</p>
+            <h2>Description:</h2>
+            <p>{err.description}</p>
+            <h2>Solution:</h2>
+            <p>{err.solution}</p>
+            <h2>Tags:</h2>
+            <div><Tags tags={err.tags} /></div>
+          </DisplayStyle>
         </>
       );
     }
