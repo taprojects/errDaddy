@@ -25,6 +25,10 @@ class ErrContainer extends PureComponent {
     this.props.fetch(this.props.match.params.searchTerm);
   } 
 
+  componentDidUpdate() {
+    if(this.props.errors.length === 0) this.props.fetch(this.props.match.params.searchTerm);
+  }
+
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   }
