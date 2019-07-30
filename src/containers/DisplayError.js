@@ -54,7 +54,7 @@ class DisplayError extends PureComponent {
             <h2>Solution:</h2>
             <p>{err.solution}</p>
             <h2>Tags:</h2>
-            <div><Tags tags={err.tags} /></div>
+            <div className="tagList"><Tags tags={err.tags} /></div>
           </DisplayStyle>
         </>
       );

@@ -13,6 +13,10 @@ p {
   color: ${mainBlue};
   margin-left: 15px;
 }
+
+.tagList {
+  margin-left: 15px;
+}
 `;
 
 export {
