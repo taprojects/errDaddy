@@ -41,12 +41,16 @@ class DisplayError extends PureComponent {
 
   render() {
 
+    let newErrMessage = <h2>Your new Error</h2>;
+    if(this.props.match.params.errId) newErrMessage = <h2 hidden></h2>;
+    
     const err = this.props.displayErr;
     if(err) {
       return (
         <>
           <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
           <DisplayStyle>
+            {newErrMessage}
             <h2>Title:</h2>
             <p>{err.title}</p>
             <h2>Description:</h2>
