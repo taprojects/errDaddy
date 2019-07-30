@@ -4,9 +4,9 @@ import Err from './Err';
 
 function ErrList({ errs }) {
 
-  const errList = errs.map(err => {
+  const errList = errs.map((err, i) => {
     return (
-      <li key={err.title}>
+      <li key={i}>
         <Err err={err} /> 
       </li>
     );
