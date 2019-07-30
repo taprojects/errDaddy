@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ErrList from '../components/errs/ErrList';
 import NavBar from '../components/nav/NavBar';
-import { getErrors } from '../actions/errorActions';
+import { getErrors, setErrId } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import { selectErrors } from '../selectors/errSelectors';
 import { selectSearchTerm } from '../selectors/searchTermSelector';

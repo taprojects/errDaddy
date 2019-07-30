@@ -1,2 +1,2 @@
 export const selectErrors = state => state.errorReducer.errorList || [];
-export const selectNewError = state => state.errorReducer.displayError;
+export const selectDisplay = state => state.errorReducer.displayError;
