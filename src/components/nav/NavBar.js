@@ -11,8 +11,13 @@ function NavBar({ handleChange, handleSubmit }) {
       </Link>
 
       <form onSubmit={handleSubmit}>
+        
         <button>search</button>
-        <input type="text" id="search-term" name="searchTerm" onChange={handleChange}/>
+        <input list="tagList" id="search-term" name="searchTerm" onChange={handleChange}/>
+        <datalist id="tagList">
+          <option value="Boston" />
+          <option value="Cambridge" />
+        </datalist>
       </form>
 
       <Link to={'/newErr'}>
