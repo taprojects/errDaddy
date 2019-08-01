@@ -31,7 +31,7 @@ class ErrContainer extends PureComponent {
   } 
   
   componentDidUpdate() {
-    if(this.props.errors.length === 0) this.props.fetch(this.props.match.params.searchTerm);
+    if(this.props.errors.length === 1 && this.props.searchTerm === 'recent') this.props.fetch(this.props.match.params.searchTerm);
   }
 
   handleChange = ({ target }) => {
