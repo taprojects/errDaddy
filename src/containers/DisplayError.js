@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavBar from '../components/nav/NavBar';
 import Tags from '../components/errs/Tags';
-import { getErrors, getDisplayError } from '../actions/errorActions';
+import { getErrors, getDisplayError, getAllTags } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
-import { selectDisplay } from '../selectors/errSelectors';
+import { selectDisplay, selectTags } from '../selectors/errSelectors';
 import { DisplayStyle } from '../styles/DisplayError.style';
  
 class DisplayError extends PureComponent {
@@ -15,7 +15,9 @@ class DisplayError extends PureComponent {
     displayErr: PropTypes.object,
     history: PropTypes.object.isRequired,
     fetchDisplay: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    fetchTags: PropTypes.func.isRequired,
+    tags: PropTypes.array
   };
 
   state = {
@@ -25,10 +27,17 @@ class DisplayError extends PureComponent {
   componentDidMount() {
     const errId = this.props.match.params.errId;
     if(errId) this.props.fetchDisplay(errId);
+    this.props.fetchTags();
   }
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  }
+
+  handleRecent = () => {
+    this.props.fetch('recent');
+    this.props.onSubmit('recent');
+    this.props.history.push('/search/recent');
   }
 
   handleSubmit = event => {
@@ -48,7 +57,12 @@ class DisplayError extends PureComponent {
     if(err) {
       return (
         <>
-          <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+          <NavBar 
+            handleChange={this.handleChange} 
+            handleSubmit={this.handleSubmit} 
+            tagArr={this.props.tags} 
+            handleRecent={this.handleRecent} 
+          />
           <DisplayStyle>
             {newErrMessage}
             <h2>Title:</h2>
@@ -69,7 +83,8 @@ class DisplayError extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  displayErr: selectDisplay(state)
+  displayErr: selectDisplay(state),
+  tags: selectTags(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -81,6 +96,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSubmit(searchTerm) {
     dispatch(setSearchTerm(searchTerm));
+  },
+  fetchTags() {
+    dispatch(getAllTags());
   }
 });
 

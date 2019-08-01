@@ -27,6 +27,7 @@ export default function reducer(state = initialState, action) {
     // get error list *****************
     // get error list *****************
     case GET_ERRORS: 
+      if(action.payload.length === 0) return { ...state, errorList: [{ title: 'NO ERRORS FOR THIS TAG' }] };
       return { ...state, errorList: action.payload };
     case GET_ERRORS_PENDING:
       return { ...state, loading: true };

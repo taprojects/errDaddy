@@ -9,7 +9,7 @@ const NavStyle = styled.nav `
   padding: 15px;
   height: 30px;
   
-  button {
+  form button {
     height: 18px;
     margin-right: 10px;
   }
@@ -25,9 +25,27 @@ const NavStyle = styled.nav `
     align-items: center;
   }
 
+  button {
+    background-color: black;
+    border: none;
+    padding: 0;
+  }
+
+  h1 {
+    text-decoration: none;
+    color: ${mainBlue};
+    margin: 0;
+    font-size: 24px;
+  }
+
   a {
     text-decoration: none;
     color: ${mainBlue};
+    font-size: 18px;
+  }
+
+  datalist {
+    max-height: 200px;
   }
 `;
 

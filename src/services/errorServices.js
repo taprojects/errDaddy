@@ -1,3 +1,5 @@
+import tagify from '../functions/tagify';
+
 const API_HOST = 'localhost:7891';
 
 export function fetchErrors(searchTerm) {
@@ -18,7 +20,10 @@ export function fetchErrorDetail(errId) {
     });
 } 
 
-export function sendNewError({ title, description, solution, tags }) {
+export function sendNewError({ title, description, solution, tagList }) {
+  const tags = tagify(tags);
+  console.log(tagList);
+  tags.toLowerCase();
   return fetch(`http://${API_HOST}/api/v1/error`, {
     method: 'POST',
     body: JSON.stringify({ title, description, solution, tags }),
@@ -33,11 +38,13 @@ export function sendNewError({ title, description, solution, tags }) {
 }
 
 export function fetchAllTags() {
-  return ['input', 'react', 'javascript', 'new tag'];
-  // return fetch(`http://${API_HOST}/api/v1/error/allTags`)
-  //   .then(res => ([res.ok, res.json()]))
-  //   .then(([ok, json]) => {
-  //     if(!ok) throw 'Unable to fetch';
-  //     return json;
-  //   });
+  return fetch(`http://${API_HOST}/api/v1/error/allTags`)
+    .then(res => ([res.ok, res.json()]))
+    .then(([ok, json]) => {
+      if(!ok) throw 'Unable to fetch';
+      return json;
+    })
+    .then(stuff => {
+      return stuff;
+    });
 }

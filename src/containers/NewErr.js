@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavBar from '../components/nav/NavBar';
 import { setSearchTerm } from '../actions/setSearchTerm';
-import { createNewError } from '../actions/errorActions';
+import { createNewError, getAllTags } from '../actions/errorActions';
 import ErrorForm from '../components/errForm/ErrorForm';
+import { selectTags } from '../selectors/errSelectors';
 
 
 class NewErr extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onFormSubmit: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    fetchTags: PropTypes.func.isRequired,
+    tags: PropTypes.array
   };
 
   state = {
@@ -23,6 +26,9 @@ class NewErr extends PureComponent {
     tags: ''
   };
 
+  componentDidMount() {
+    this.props.fetchTags();
+  } 
   
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -43,19 +49,25 @@ class NewErr extends PureComponent {
       solution,
       tags
     } = this.state;
-
-
-
     this.props.onFormSubmit({ title, description, solution, tags });
     this.props.history.push('/displayErr');
+  }
 
+  handleRecent = () => {
+    this.props.onSubmit('recent');
+    this.props.history.push('/search/recent');
   }
 
   render() {
 
     return (
       <>
-        <NavBar handleChange={this.handleChange} handleSubmit={this.handleSearchSubmit}/>
+        <NavBar 
+          handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit} 
+          tagArr={this.props.tags} 
+          handleRecent={this.handleRecent} 
+        />
         <h1>New Solved Err Babbbieeee</h1>
         <ErrorForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit}/>
       </>
@@ -63,16 +75,23 @@ class NewErr extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  tags: selectTags(state)
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(searchTerm) {
     dispatch(setSearchTerm(searchTerm));
   },
   onFormSubmit({ title, description, solution, tags }) {
     dispatch(createNewError({ title, description, solution, tags }));
+  },
+  fetchTags() {
+    dispatch(getAllTags());
   }
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewErr);

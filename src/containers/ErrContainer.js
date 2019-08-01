@@ -6,6 +6,7 @@ import NavBar from '../components/nav/NavBar';
 import { getErrors, getAllTags } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import { selectErrors, selectTags } from '../selectors/errSelectors';
+import { selectSearchTerm } from '../selectors/searchTermSelector';
 
 class ErrContainer extends PureComponent {
   static propTypes = {
@@ -15,7 +16,8 @@ class ErrContainer extends PureComponent {
     errors: PropTypes.array.isRequired,
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
-    tags: PropTypes.array
+    tags: PropTypes.array,
+    searchTerm: PropTypes.string
   };
 
   state = {
@@ -29,12 +31,17 @@ class ErrContainer extends PureComponent {
   } 
   
   componentDidUpdate() {
-    if(this.props.tags.length === 0) this.props.fetchTags();
     if(this.props.errors.length === 0) this.props.fetch(this.props.match.params.searchTerm);
   }
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  }
+
+  handleRecent = () => {
+    this.props.fetch('recent');
+    this.props.onSubmit('recent');
+    this.props.history.push('/search/recent');
   }
 
   handleSubmit = event => {
@@ -52,7 +59,12 @@ class ErrContainer extends PureComponent {
     if(errors && tags) {
       return (
         <>
-        <NavBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} tagArr={this.props.tags}/>
+        <NavBar 
+          handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit} 
+          tagArr={this.props.tags} 
+          handleRecent={this.handleRecent} 
+        />
         <h2> &gt; {searchTerm || 'recent'}</h2>
         <ErrList errs={errors} />
       </>
@@ -64,7 +76,8 @@ class ErrContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   errors: selectErrors(state),
-  tags: selectTags(state)
+  tags: selectTags(state),
+  searchTerm: selectSearchTerm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
