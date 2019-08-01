@@ -20,10 +20,8 @@ export function fetchErrorDetail(errId) {
     });
 } 
 
-export function sendNewError({ title, description, solution, tagList }) {
-  const tags = tagify(tags);
-  console.log(tagList);
-  tags.toLowerCase();
+export function sendNewError({ title, description, solution, tags : tagList }) {
+  const tags = tagify(tagList);
   return fetch(`http://${API_HOST}/api/v1/error`, {
     method: 'POST',
     body: JSON.stringify({ title, description, solution, tags }),

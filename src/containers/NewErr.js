@@ -64,7 +64,7 @@ class NewErr extends PureComponent {
       <>
         <NavBar 
           handleChange={this.handleChange} 
-          handleSubmit={this.handleSubmit} 
+          handleSubmit={this.handleFormSubmit} 
           tagArr={this.props.tags} 
           handleRecent={this.handleRecent} 
         />
