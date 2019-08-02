@@ -73,6 +73,16 @@ class DisplayError extends PureComponent {
             <p>{displayErr.solution}</p>
             <h2>Tags:</h2>
             <div className="tagList"><Tags tags={displayErr.tags} /></div>
+            <section className="helpfull">
+              <div>
+                <button className="good" >This was helpful</button>
+                <span className="good">{displayErr.good}</span>
+              </div>
+              <div>
+                <button className="bad" >This was bad advice</button>
+                <span className="bad">{displayErr.bad}</span>
+              </div>
+            </section>
           </DisplayStyle>
         </>
       );
