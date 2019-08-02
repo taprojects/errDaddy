@@ -22,7 +22,6 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(action);
   switch(action.type) {
     // get error list *****************
     // get error list *****************

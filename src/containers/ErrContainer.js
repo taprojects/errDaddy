@@ -7,6 +7,8 @@ import { getErrors, getAllTags } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import { selectErrors, selectTags } from '../selectors/errSelectors';
 import { selectSearchTerm } from '../selectors/searchTermSelector';
+import { ErrorContainerStyle } from '../styles/errorCotainer.style';
+
 
 class ErrContainer extends PureComponent {
   static propTypes = {
@@ -27,7 +29,8 @@ class ErrContainer extends PureComponent {
   componentDidMount() {
     this.setState({ searchTerm: this.props.match.params.searchTerm });
     this.props.fetch(this.props.match.params.searchTerm);
-    this.props.fetchTags();
+    if(!this.props.tags) this.props.fetchTags();
+    
   } 
   
   componentDidUpdate() {
@@ -65,8 +68,10 @@ class ErrContainer extends PureComponent {
           tagArr={this.props.tags} 
           handleRecent={this.handleRecent} 
         />
-        <h2> &gt; {searchTerm || 'recent'}</h2>
-        <ErrList errs={errors} />
+        <ErrorContainerStyle>
+          <h2> &gt; {searchTerm || 'recent'}</h2>
+          <ErrList errs={errors} />
+        </ErrorContainerStyle>
       </>
       );
     }

@@ -13,8 +13,8 @@ function NavBar({ handleChange, handleSubmit, handleRecent, tagArr }) {
 
       <form onSubmit={handleSubmit}>
         
-        <button>search</button>
-        <input list="tagList" id="search-term" name="searchTerm" onChange={handleChange}/>
+        {/* <button>search</button> */}
+        <input list="tagList" id="search-term" name="searchTerm" onChange={handleChange} placeholder="search errors by #tag"/>
         <DataList tagArr={tagArr} />
       </form>
 

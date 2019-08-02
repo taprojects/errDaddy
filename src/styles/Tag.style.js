@@ -9,6 +9,7 @@ color: ${mainBlue};
 a {
   margin: 5px;
   text-decoration: none;
+  color: white;
 }
 `;
 

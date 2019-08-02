@@ -6,6 +6,7 @@ import { setSearchTerm } from '../actions/setSearchTerm';
 import { createNewError, getAllTags } from '../actions/errorActions';
 import ErrorForm from '../components/errForm/ErrorForm';
 import { selectTags } from '../selectors/errSelectors';
+import { FormStyle } from '../styles/form.style';
 
 
 class NewErr extends PureComponent {
@@ -27,7 +28,7 @@ class NewErr extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.fetchTags();
+    if(!this.props.tags) this.props.fetchTags();
   } 
   
   handleChange = ({ target }) => {
@@ -59,19 +60,24 @@ class NewErr extends PureComponent {
   }
 
   render() {
-
-    return (
-      <>
+    if(this.props.tags) {
+      return (
+        <>
         <NavBar 
           handleChange={this.handleChange} 
           handleSubmit={this.handleFormSubmit} 
           tagArr={this.props.tags} 
           handleRecent={this.handleRecent} 
         />
-        <h1>New Solved Err Babbbieeee</h1>
-        <ErrorForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit}/>
+        <FormStyle>
+          <h1>New Solved Err Babbbieeee</h1>
+          <ErrorForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit}/>
+        </FormStyle>
       </>
-    );
+      );
+    } else {
+      return <h1>Loading</h1>;
+    }
   }
 }
 

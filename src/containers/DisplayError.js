@@ -27,7 +27,7 @@ class DisplayError extends PureComponent {
   componentDidMount() {
     const errId = this.props.match.params.errId;
     if(errId) this.props.fetchDisplay(errId);
-    this.props.fetchTags();
+    if(!this.props.tags) this.props.fetchTags();
   }
 
   handleChange = ({ target }) => {
@@ -53,8 +53,8 @@ class DisplayError extends PureComponent {
     let newErrMessage = <h2>Your new Error</h2>;
     if(this.props.match.params.errId) newErrMessage = <h2 hidden></h2>;
     
-    const err = this.props.displayErr;
-    if(err) {
+    const { displayErr, tags } = this.props;
+    if(displayErr && tags) {
       return (
         <>
           <NavBar 
@@ -66,13 +66,13 @@ class DisplayError extends PureComponent {
           <DisplayStyle>
             {newErrMessage}
             <h2>Title:</h2>
-            <p>{err.title}</p>
+            <p>{displayErr.title}</p>
             <h2>Description:</h2>
-            <p>{err.description}</p>
+            <p>{displayErr.description}</p>
             <h2>Solution:</h2>
-            <p>{err.solution}</p>
+            <p>{displayErr.solution}</p>
             <h2>Tags:</h2>
-            <div className="tagList"><Tags tags={err.tags} /></div>
+            <div className="tagList"><Tags tags={displayErr.tags} /></div>
           </DisplayStyle>
         </>
       );
