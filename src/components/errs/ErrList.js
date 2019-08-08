@@ -6,7 +6,7 @@ function ErrList({ errs }) {
 
   const errList = errs.map((err, i) => {
     return (
-      <li key={i}>
+      <li key={i} >
         <Err err={err} /> 
       </li>
     );

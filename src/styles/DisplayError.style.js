@@ -28,6 +28,36 @@ a {
 a: hover {
   color: red;
 }
+
+.helpfull {
+  margin: 30px;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    border: none;
+    padding: 8px;
+  }
+  
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    span {
+      margin-top: 3px;
+      color: white;
+    }
+  }
+}
+.good: hover {
+  background-color: green;
+}
+.bad: hover {
+  background-color: red;
+}
+
 `;
 
 export {

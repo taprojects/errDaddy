@@ -2,77 +2,46 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ErrList from '../components/errs/ErrList';
-import NavBar from '../components/nav/NavBar';
-import { getErrors, getAllTags } from '../actions/errorActions';
-import { setSearchTerm } from '../actions/setSearchTerm';
-import { selectErrors, selectTags } from '../selectors/errSelectors';
+import { getErrors } from '../actions/errorActions';
+import { selectErrors } from '../selectors/errSelectors';
 import { selectSearchTerm } from '../selectors/searchTermSelector';
 import { ErrorContainerStyle } from '../styles/errorCotainer.style';
-
+import { setSearchTerm } from '../actions/setSearchTerm';
 
 class ErrContainer extends PureComponent {
   static propTypes = {
     fetch: PropTypes.func.isRequired,
-    fetchTags: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    errors: PropTypes.array.isRequired,
+    newTagSearch: PropTypes.func,
     history: PropTypes.object.isRequired,
+    errors: PropTypes.array.isRequired,
     match: PropTypes.object.isRequired,
-    tags: PropTypes.array,
-    searchTerm: PropTypes.string
+    searchTerm: PropTypes.string,
+    setNewSearchTerm: PropTypes.func.isRequired
   };
 
-  state = {
-    searchTerm: this.props.match.params.searchTerm
-  }
-
   componentDidMount() {
-    this.setState({ searchTerm: this.props.match.params.searchTerm });
     this.props.fetch(this.props.match.params.searchTerm);
-    if(!this.props.tags) this.props.fetchTags();
-    
   } 
   
   componentDidUpdate() {
-    if(this.props.errors.length === 1 && this.props.searchTerm === 'recent') this.props.fetch(this.props.match.params.searchTerm);
-  }
-
-  handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  }
-
-  handleRecent = () => {
-    this.props.fetch('recent');
-    this.props.onSubmit('recent');
-    this.props.history.push('/search/recent');
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    const { searchTerm } = this.state;
-    this.props.onSubmit(searchTerm || 'recent');
-    this.props.fetch(searchTerm || 'recent');
-    this.props.history.push(`/search/${searchTerm}`);
+    // if(this.props.errors.length === 1 && this.props.searchTerm === 'recent') this.props.fetch(this.props.match.params.searchTerm);
+    if(this.props.searchTerm === 'recent' && this.props.errors.title === 'NO ERRORS FOR THIS TAG') {
+      this.props.setNewSearchTerm('recent');
+      this.props.fetch('recent');
+      
+    }
   }
 
   render() {
-    const { errors, tags } = this.props;
+    const { errors } = this.props;
     const searchTerm = this.props.match.params.searchTerm;
 
-    if(errors && tags) {
+    if(errors) {
       return (
-        <>
-        <NavBar 
-          handleChange={this.handleChange} 
-          handleSubmit={this.handleSubmit} 
-          tagArr={this.props.tags} 
-          handleRecent={this.handleRecent} 
-        />
         <ErrorContainerStyle>
           <h2> &gt; {searchTerm || 'recent'}</h2>
-          <ErrList errs={errors} />
+          <ErrList errs={errors} newTagSearch={this.setSearchTerm} />
         </ErrorContainerStyle>
-      </>
       );
     }
     return <h2>Loading...</h2>;
@@ -81,7 +50,6 @@ class ErrContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   errors: selectErrors(state),
-  tags: selectTags(state),
   searchTerm: selectSearchTerm(state)
 });
 
@@ -89,11 +57,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetch(searchTerm) {
     dispatch(getErrors(searchTerm));
   },
-  onSubmit(searchTerm) {
+  setNewSearchTerm(searchTerm) {
     dispatch(setSearchTerm(searchTerm));
-  },
-  fetchTags() {
-    dispatch(getAllTags());
   }
 });
 
