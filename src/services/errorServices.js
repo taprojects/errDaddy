@@ -1,6 +1,8 @@
 import tagify from '../functions/tagify';
 
-const API_HOST = 'localhost:7891';
+
+// eslint-disable-next-line no-undef
+const API_HOST = process.env.API_URL;
 
 export function fetchErrors(searchTerm) {
   return fetch(`http://${API_HOST}/api/v1/error/${searchTerm}`)
