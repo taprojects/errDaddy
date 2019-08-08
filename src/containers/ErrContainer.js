@@ -25,7 +25,7 @@ class ErrContainer extends PureComponent {
   
   componentDidUpdate() {
     // if(this.props.errors.length === 1 && this.props.searchTerm === 'recent') this.props.fetch(this.props.match.params.searchTerm);
-    if(this.props.searchTerm === 'recent' && this.props.errors.length === 1) {
+    if(this.props.searchTerm === 'recent' && this.props.errors.title === 'NO ERRORS FOR THIS TAG') {
       this.props.setNewSearchTerm('recent');
       this.props.fetch('recent');
       
@@ -34,7 +34,7 @@ class ErrContainer extends PureComponent {
 
   render() {
     const { errors } = this.props;
-    const searchTerm = this.props.searchTerm;
+    const searchTerm = this.props.match.params.searchTerm;
 
     if(errors) {
       return (

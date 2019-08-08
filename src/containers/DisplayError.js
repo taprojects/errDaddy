@@ -17,6 +17,7 @@ class DisplayError extends PureComponent {
   componentDidMount() {
     const errId = this.props.match.params.errId;
     if(errId) this.props.fetchDisplay(errId);
+
   }
 
   render() {
