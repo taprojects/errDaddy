@@ -33,7 +33,7 @@ class NewErr extends PureComponent {
       tags
     } = this.state;
     this.props.onFormSubmit({ title, description, solution, tags });
-    this.props.history.push('/displayErr');
+    this.props.history.push('/displayErr/new');
   }
 
   render() {

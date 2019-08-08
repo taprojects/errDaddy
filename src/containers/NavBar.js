@@ -8,6 +8,7 @@ import { selectTags } from '../selectors/errSelectors';
 import { getErrors, getAllTags } from '../actions/errorActions';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import DataList from '../components/nav/DataList';
+import { withRouter } from 'react-router-dom';
 
 class NavBar extends PureComponent {
   static propTypes = {
@@ -31,7 +32,6 @@ class NavBar extends PureComponent {
   }
 
   handleSubmit = event => {
-    console.log(this.props);
     event.preventDefault();
     const { searchTerm } = this.state;
     this.props.onSubmit(searchTerm);
@@ -96,41 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(NavBar);
-
-
-
-
-
-// function NavBar({ handleChange, handleSubmit, handleRecent, tagArr }) {
-//   return (
-//     <NavStyle>
-//       <button onClick={handleRecent}>
-//         <h1>errDaddy</h1>
-//       </button>
-
-//       <form onSubmit={handleSubmit}>
-        
-//         {/* <button>search</button> */}
-//         <input list="tagList" id="search-term" name="searchTerm" onChange={handleChange} placeholder="search errors by #tag"/>
-//         <DataList tagArr={tagArr} />
-//       </form>
-
-//       <Link to={'/newErr'}>
-//         <p>new err</p>
-//       </Link>
-//     </NavStyle>
-//   );
-// }
-
-// NavBar.propTypes = {
-//   handleChange: PropTypes.func.isRequired,
-//   handleSubmit: PropTypes.func.isRequired,
-//   handleRecent: PropTypes.func.isRequired,
-//   tagArr: PropTypes.array.isRequired
-// };
-
-// export default NavBar;
+)(NavBar));
