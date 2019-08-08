@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mainBlue } from './styleVars.style';
+import { mainBlue, aldrich } from './styleVars.style';
 
 const ErrorContainerStyle = styled.div `
 
@@ -8,6 +8,7 @@ min-width: 900px;
 h2 {
   color: white;
   margin-left: 50px;
+  font-family: ${aldrich};
 }
 
 ul {
@@ -18,13 +19,14 @@ ul {
 
 li {
   height: 25px;
+  font-family: ${aldrich};
 }
 
 a {
   color: ${mainBlue};
   text-decoration: none;
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1.5fr;
   justify-content: space-between;
 }
 

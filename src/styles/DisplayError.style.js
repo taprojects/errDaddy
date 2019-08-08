@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mainBlue } from './styleVars.style';
+import { mainBlue, aldrich, offWhite } from './styleVars.style';
 
 const DisplayStyle = styled.div `
 display: flex;
@@ -8,12 +8,14 @@ margin: 15px;
 
 h2 {
   margin: 5px;
-  color: white;
+  color: ${offWhite};
+  font-family: ${aldrich};
 }
 
 p {
   color: ${mainBlue};
   margin-left: 15px;
+  font-family: ${aldrich};
 }
 
 .tagList {
@@ -23,6 +25,7 @@ p {
 a {
   color: ${mainBlue};
   text-decoration: none;
+  font-family: ${aldrich};
 }
 
 a: hover {
@@ -38,6 +41,8 @@ a: hover {
   button {
     border: none;
     padding: 8px;
+    font-family: ${aldrich};
+    background-color: ${offWhite};
   }
   
   div {
@@ -46,8 +51,9 @@ a: hover {
     align-items: center;
     
     span {
-      margin-top: 3px;
-      color: white;
+      margin-top: 7px;
+      color: ${offWhite};
+      font-family: ${aldrich};
     }
   }
 }

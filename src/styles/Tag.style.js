@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mainBlue } from './styleVars.style';
+import { mainBlue, aldrich } from './styleVars.style';
 
 const TagStyle = styled.div `
 display: flex;
@@ -9,7 +9,7 @@ color: ${mainBlue};
 a {
   margin: 5px;
   text-decoration: none;
-  color: white;
+  
 }
 `;
 

@@ -52,10 +52,7 @@ class NavBar extends PureComponent {
       return (
         <>
        <NavStyle>
-
          <h1 onClick={this.returnHome}>errDaddy</h1>
-
-
          <form onSubmit={this.handleSubmit}>
            <input 
              list="tagList" 

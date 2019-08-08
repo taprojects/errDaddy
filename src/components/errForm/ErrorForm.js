@@ -6,10 +6,27 @@ function ErrorForm({ handleFormSubmit, handleChange }) {
   return (
     <FormStyle>
       <form onSubmit={handleFormSubmit}>
-        <input id='title' type="text" name="title" onChange={handleChange} placeholder='title for err' required />
-        <textarea id='description' type="text" name="description" onChange={handleChange} placeholder='description' required />
-        <textarea id='solution' type="text" name="solution" onChange={handleChange} placeholder='solution' required />
-        <textarea id='tags' type="text" name="tags" onChange={handleChange} placeholder='tags' required />
+
+        <div className="input-items" >
+          <span>title: </span>
+          <input id='title' type="text" name="title" onChange={handleChange} placeholder='title of my post' required />
+        </div>
+
+        <div className="input-items" >
+          <span>description: </span>
+          <textarea id='description' type="text" name="description" onChange={handleChange} placeholder='I was tryint to *** and *** was going wrong...' required />
+        </div>
+
+        <div className="input-items" >
+          <span>solution: </span>
+          <textarea id='solution' type="text" name="solution" onChange={handleChange} placeholder='finally id did ***** and everything started working' required />
+        </div>
+
+        <div className="input-items" >
+          <span>tags: </span>
+          <textarea id='tags' type="text" name="tags" onChange={handleChange} placeholder='#programing radiobuttons JavaScript' required />
+        </div>
+
         <button>submit new error</button>
       </form>
     </FormStyle>
