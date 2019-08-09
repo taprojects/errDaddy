@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import { mainBlue, offWhite, saira, aldrich } from './styleVars.style';
 
 const NavStyle = styled.nav `
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color: black;
-  padding: 15px;
-  height: 30px;
+
   min-width: 825px;
   
   form button {
@@ -29,6 +27,7 @@ const NavStyle = styled.nav `
   form {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   button {
@@ -56,6 +55,9 @@ const NavStyle = styled.nav `
   }
 
   a {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     text-decoration: none;
     color: ${mainBlue};
     font-size: 24px;
