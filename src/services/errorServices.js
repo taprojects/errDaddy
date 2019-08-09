@@ -5,7 +5,7 @@ import tagify from '../functions/tagify';
 const API_HOST = process.env.API_URL;
 
 export function fetchErrors(searchTerm) {
-  return fetch(`https://${API_HOST}/api/v1/error/${searchTerm}`)
+  return fetch(`${API_HOST}/api/v1/error/${searchTerm}`)
     .then(res => ([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw 'Unable to fetch';
@@ -14,7 +14,7 @@ export function fetchErrors(searchTerm) {
 } 
 
 export function fetchErrorDetail(errId) {
-  return fetch(`https://${API_HOST}/api/v1/error/detail/${errId}`)
+  return fetch(`${API_HOST}/api/v1/error/detail/${errId}`)
     .then(res => ([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw 'Unable to fetch';
@@ -24,7 +24,7 @@ export function fetchErrorDetail(errId) {
 
 export function sendNewError({ title, description, solution, tags : tagList }) {
   const tags = tagify(tagList);
-  return fetch(`https://${API_HOST}/api/v1/error`, {
+  return fetch(`${API_HOST}/api/v1/error`, {
     method: 'POST',
     body: JSON.stringify({ title, description, solution, tags }),
     headers:{
@@ -38,7 +38,7 @@ export function sendNewError({ title, description, solution, tags : tagList }) {
 }
 
 export function fetchAllTags() {
-  return fetch(`https://${API_HOST}/api/v1/error/allTags`)
+  return fetch(`${API_HOST}/api/v1/error/allTags`)
     .then(res => ([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw 'Unable to fetch';
@@ -50,7 +50,7 @@ export function fetchAllTags() {
 }
 
 export function updateQuality(goodOrBad, id) {
-  return fetch(`https://${API_HOST}/api/v1/error/${goodOrBad}/${id}`, {
+  return fetch(`${API_HOST}/api/v1/error/${goodOrBad}/${id}`, {
     method: 'PATCH',
     headers:{
       'Content-Type': 'application/json'
