@@ -5,6 +5,7 @@ import Tags from '../components/errs/Tags';
 import { getDisplayError } from '../actions/errorActions';
 import { selectDisplay } from '../selectors/errSelectors';
 import { DisplayStyle } from '../styles/DisplayError.style';
+import { updateQuality } from '../services/errorServices';
  
 class DisplayError extends PureComponent {
   static propTypes = {
@@ -17,7 +18,14 @@ class DisplayError extends PureComponent {
   componentDidMount() {
     const errId = this.props.match.params.errId;
     if(errId) this.props.fetchDisplay(errId);
-
+  }
+  
+  updateQuality = () => {
+    const id = this.props.displayErr._id;
+    updateQuality(event.target.value, id);
+    document.getElementById('goodBttn').disabled = true;
+    document.getElementById('badBttn').disabled = true;
+    document.getElementById(`${event.target.value}Score`).textContent++;
   }
 
   render() {
@@ -40,12 +48,12 @@ class DisplayError extends PureComponent {
           <div className="tagList"><Tags tags={displayErr.tags} /></div>
           <section className="helpfull">
             <div>
-              <button className="good" >This was helpful</button>
-              <span className="good">{displayErr.good}</span>
+              <button id="goodBttn" className="good" onClick={this.updateQuality} value="good">This was helpful</button>
+              <span id="goodScore" className="good">{displayErr.good}</span>
             </div>
             <div>
-              <button className="bad" >This was bad advice</button>
-              <span className="bad">{displayErr.bad}</span>
+              <button id="badBttn" className="bad" onClick={this.updateQuality} value="bad">This was bad advice</button>
+              <span id="badScore" className="bad">{displayErr.bad}</span>
             </div>
           </section>
         </DisplayStyle>
