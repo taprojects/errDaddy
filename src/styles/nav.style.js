@@ -41,9 +41,9 @@ const NavStyle = styled.nav `
     text-decoration: none;
     color: ${mainBlue};
     margin: 0;
+    margin-left: 20px;
     font-size: 42px;
     font-weight:  bold;
-    width: 200px;
     font-family: ${saira};
   }
 
