@@ -39,7 +39,14 @@ class ErrContainer extends PureComponent {
     if(errors) {
       return (
         <ErrorContainerStyle>
-          <h2> &gt; {searchTerm || 'recent'}</h2>
+          <header>
+            <h2> &gt; {searchTerm || 'recent'}</h2>
+            <div id="paging">
+              <button id="prev-button">Previous</button>
+              <input id="current-page" placeholder="1" />
+              <button id="next-button">Next</button>
+            </div>
+          </header>
           <ErrList errs={errors} newTagSearch={this.setSearchTerm} />
         </ErrorContainerStyle>
       );
