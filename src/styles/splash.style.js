@@ -6,6 +6,7 @@ const SplashStyle = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center
 
   h1, h3, p {
     color: ${offWhite};
@@ -16,16 +17,6 @@ const SplashStyle = styled.section`
     font-size: 42px;
     width: 600px;
     margin-top: 60px;
-  }
-  
-  h3 {
-    width: 600px;
-    margin-left: 30px;
-  }
-  
-  p {
-    width: 600px;
-    margin-left: 50px;
   }
 
 `;
