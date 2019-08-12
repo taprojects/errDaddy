@@ -39,22 +39,20 @@ class ErrContainer extends PureComponent {
     const nextBttn = document.querySelectorAll('#next-button');
     const footer = document.querySelector('footer');
 
-    if(this.props.searchTerm === 'recent' && this.props.errors.title === 'NO ERRORS FOR THIS TAG') {
+    prevBttn.forEach(btn => btn.disabled = false);
+    nextBttn.forEach(btn => btn.disabled = false);
+    footer.hidden = false;
+
+    if(this.props.searchTerm === 'recent' && this.props.errors[0].title === 'NO ERRORS FOR THIS TAG') {
       this.props.setNewSearchTerm('recent');
       this.props.fetch('recent');
     }
 
-    if(this.props.history.location.search[0] === '?') {
-      this.setState({ page: this.props.history.location.search.slice(6) });
-    }
-
-    if(page === '1') prevBttn.forEach(btn => btn.disabled = true);
-    else prevBttn.forEach(btn => btn.disabled = false);
+    if(this.props.history.location.search[0] === '?') this.setState({ page: this.props.history.location.search.slice(6) });
     
+    if(page === '1') prevBttn.forEach(btn => btn.disabled = true);
     if(page == totalPages) nextBttn.forEach(btn => btn.disabled = true);
-    else nextBttn.forEach(btn => btn.disabled = false);
-
-    if(totalPages == 1) footer.hidden = true;
+    if(totalPages === 1) footer.hidden = true;
   }
 
   handleChange = ({ target }) => {
@@ -75,8 +73,7 @@ class ErrContainer extends PureComponent {
     const { page } = this.state;
     const postsToDisplay = pagePosts(page, PER_PAGE, errors);
 
-    if(errors && page) {
-      
+    if(errors && page !== '') {
       return (
         <ErrorContainerStyle>
           <header>

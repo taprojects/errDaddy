@@ -13,8 +13,12 @@ h2 {
 
 header {
   display: grid;
-  grid-template-columns: 11fr 4fr 1.3fr;
+  grid-template-columns: 3fr 1fr;
   }
+}
+
+footer {
+  margin: 20px;
 }
 
 `;

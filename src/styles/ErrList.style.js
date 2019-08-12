@@ -2,14 +2,18 @@ import styled from 'styled-components';
 import { mainBlue, offWhite, aldrich } from './styleVars.style';
 
 const ErrListStyle = styled.ul `
-  margin-left: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
   color: white;
-  width: 80%;
 
 li {
   color: ${offWhite};
   height: 25px;
   font-family: ${aldrich};
+  width: 80%;
 }
 
 li :hover {

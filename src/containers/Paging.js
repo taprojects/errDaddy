@@ -7,7 +7,7 @@ const scrollToTop = () => scroll.scrollToTop();
 
 function Paging({ handlePaging, handleChange, page }) {
   return (
-    <PagingStyle>
+    <PagingStyle className="paging-block">
       <button id="prev-button" value="prev" onClick={() => {handlePaging(); scrollToTop();}}>Previous</button>
       <form onSubmit={handlePaging}>
         <input name="page" placeholder={page} onChange={handleChange} />
