@@ -8,10 +8,8 @@ function Err({ err }) {
     <Link to={`/displayErr/${err._id}`} >
       <p>{err.title}</p>
       <span>{err.time.slice(0, 10)}</span>
-      <div>
-        <span>Good {err.good}</span>
-        <span>bad {err.bad}</span>
-      </div>
+      <span>Good {err.good}</span>
+      <span>bad {err.bad}</span>
     </Link>
   );
 }
