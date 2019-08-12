@@ -14,12 +14,12 @@ function ErrorForm({ handleFormSubmit, handleChange }) {
 
         <div className="input-items" >
           <span>description: </span>
-          <textarea id='description' type="text" name="description" onChange={handleChange} placeholder='I was tryint to *** and *** was going wrong...' required />
+          <textarea id='description' type="text" name="description" onChange={handleChange} placeholder='I was trying to *** and *** was going wrong...' required />
         </div>
 
         <div className="input-items" >
           <span>solution: </span>
-          <textarea id='solution' type="text" name="solution" onChange={handleChange} placeholder='finally id did ***** and everything started working' required />
+          <textarea id='solution' type="text" name="solution" onChange={handleChange} placeholder='finally i did ***** and everything started working' required />
         </div>
 
         <div className="input-items" >
