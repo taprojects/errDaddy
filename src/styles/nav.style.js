@@ -19,7 +19,7 @@ const NavStyle = styled.nav `
   }
 
   h1: hover {
-    curser: pointer;
+    cursor: pointer;
     color: red;
     font-size: 265%;
     transition: 0.1s;
@@ -46,6 +46,11 @@ const NavStyle = styled.nav `
     max-height: 200px;
   }
 
+  div {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   a {
     display: flex;
     justify-content: flex-end;
@@ -55,6 +60,7 @@ const NavStyle = styled.nav `
     font-size: 24px;
     font-family: ${saira};
     margin-right: 20px;
+    width: 6rem;
   }
 
   a: hover {
