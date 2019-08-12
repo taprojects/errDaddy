@@ -6,12 +6,10 @@ function Err({ err }) {
   if(!err._id) return <h3>{err.title}</h3>;
   return (
     <Link to={`/displayErr/${err._id}`} >
-      <p>{err.title}</p>
+      <p id="title">{err.title}</p>
       <span>{err.time.slice(0, 10)}</span>
-      <div>
-        <span>Good {err.good}</span>
-        <span>bad {err.bad}</span>
-      </div>
+      <span>Good {err.good}</span>
+      <span>bad {err.bad}</span>
     </Link>
   );
 }

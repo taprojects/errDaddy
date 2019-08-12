@@ -64,10 +64,9 @@ class NavBar extends PureComponent {
            />
            <DataList tagArr={tagArr} />
          </form>
-
-         <Link to={'/newErr'}>
-           <p>new err</p>
-         </Link>
+         <div>
+           <Link to={'/newErr'}>new err</Link>
+         </div>
        </NavStyle>
       </>
       );

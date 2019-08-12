@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Err from './Err';
+import { ErrListStyle } from '../../styles/ErrList.style';
 
 function ErrList({ errs }) {
 
@@ -13,9 +14,9 @@ function ErrList({ errs }) {
   });
 
   return (
-    <ul>
+    <ErrListStyle>
       {errList}
-    </ul>
+    </ErrListStyle>
   );
 }
 

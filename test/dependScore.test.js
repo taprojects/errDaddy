@@ -1,4 +1,4 @@
-import numGoodSpans from '../../src/functions/dependScore';
+import numGoodSpans from '../src/functions/dependScore';
 
 describe('depend function', () => {
   it('7 good and 3 bad', () => {
