@@ -23,6 +23,10 @@ li :hover {
   }
 }
 
+#title {
+  margin-right: 10px;
+}
+
 a {
   color: ${mainBlue};
   text-decoration: none;
