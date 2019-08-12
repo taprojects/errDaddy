@@ -8,6 +8,9 @@ import { selectSearchTerm } from '../selectors/searchTermSelector';
 import { ErrorContainerStyle } from '../styles/errorCotainer.style';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import Paging from './Paging';
+import pagePosts from '../utils/pagePosts';
+
+const PER_PAGE = 20;
 
 class ErrContainer extends PureComponent {
   static propTypes = {
@@ -20,29 +23,66 @@ class ErrContainer extends PureComponent {
     setNewSearchTerm: PropTypes.func.isRequired
   };
 
+  state = {
+    page: '1'
+  }
+
   componentDidMount() {
     this.props.fetch(this.props.match.params.searchTerm);
   } 
   
   componentDidUpdate() {
+    const { page } = this.state;
+    const numPosts = this.props.errors.length;
+    const totalPages = Math.ceil(numPosts / PER_PAGE);
+    const prevBttn = document.getElementById('prev-button');
+    const nextBttn = document.getElementById('next-button');
+
     if(this.props.searchTerm === 'recent' && this.props.errors.title === 'NO ERRORS FOR THIS TAG') {
       this.props.setNewSearchTerm('recent');
       this.props.fetch('recent');
     }
+
+    if(this.props.history.location.search[0] === '?') {
+      this.setState({ page: this.props.history.location.search.slice(6) });
+    }
+
+    if(page === '1') prevBttn.disabled = true;
+    else prevBttn.disabled = false;
+    
+    if(page == totalPages) nextBttn.disabled = true;
+    else nextBttn.disabled = false;
+
+    
+  }
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  }
+
+  handlePaging = () => {
+    event.preventDefault();
+    let newPage = this.state.page;
+    if(event.target.value === undefined) newPage = this.state.page;
+    else event.target.value === 'prev' ? newPage-- : newPage++;
+    this.props.history.push(`${this.props.history.location.pathname}?page=${newPage}`);    
   }
 
   render() {
     const { errors } = this.props;
     const searchTerm = this.props.match.params.searchTerm;
+    const { page } = this.state;
+    const postsToDisplay = pagePosts(page, PER_PAGE, errors);
 
-    if(errors) {
+    if(errors && page) {
+      
       return (
         <ErrorContainerStyle>
           <header>
             <h2> &gt; {searchTerm || 'recent'}</h2>
-            <Paging />
+            <Paging handleChange={this.handleChange} handlePaging={this.handlePaging} page={page} />
           </header>
-          <ErrList errs={errors} newTagSearch={this.setSearchTerm} />
+          <ErrList errs={postsToDisplay} newTagSearch={this.setSearchTerm} />
         </ErrorContainerStyle>
       );
     }

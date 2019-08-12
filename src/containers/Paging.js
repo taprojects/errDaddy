@@ -1,38 +1,23 @@
-import React, { PureComponent } from 'react';
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { PagingStyle } from '../styles/Paging.style';
 
-class Paging extends PureComponent {
-  static propTypes = {
-  };
-
-  state = {
-  };
-
-  render() {
-
-    return (
-      <PagingStyle>
-        <button id="prev-button">Previous</button>
-        <input id="current-page" placeholder="1" />
-        <button id="next-button">Next</button>
-      </PagingStyle>
-    );
-  }
+function Paging({ handlePaging, handleChange, page }) {
+  return (
+    <PagingStyle>
+      <button id="prev-button" value="prev" onClick={handlePaging}>Previous</button>
+      <form onSubmit={handlePaging}>
+        <input name="page" placeholder={page} onChange={handleChange} />
+      </form>
+      <button id="next-button" value="next" onClick={handlePaging}>Next</button>
+    </PagingStyle>
+  );
 }
 
-// const mapStateToProps = state => ({
+Paging.propTypes = {
+  handlePaging: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  page: PropTypes.string
+};
 
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   fetch() {
-//     dispatch();
-//   }
-// });
-
-export default connect(
-  // mapStateToProps,
-  // mapDispatchToProps
-)(Paging);
+export default Paging;

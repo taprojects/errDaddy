@@ -13,7 +13,7 @@ h2 {
 
 header {
   display: grid;
-  grid-template-columns: 11fr 4fr;
+  grid-template-columns: 11fr 4fr 1.3fr;
   }
 }
 
