@@ -9,10 +9,12 @@ import NewErr from '../containers/NewErr';
 import ErrContainer from '../containers/ErrContainer';
 import DisplayError from '../containers/DisplayError';
 import Splash from './Splash';
+import Favicon from 'react-favicon';
 
 export default function App() {
   return (
     <Router >
+      <Favicon url="../../assets/fav.png" />
       <NavBar />
       <Switch>
         <Route exact path="/" component={Splash} />
