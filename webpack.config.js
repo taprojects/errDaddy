@@ -14,7 +14,7 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [
-    new HtmlPlugin({ template: './src/index.html', favicon: './assets/favicon.ico' }),
+    new HtmlPlugin({ template: './src/index.html', favicon: './src/favicon.png' }),
     new CleanWebpackPlugin(),
     new DotEnv({ systemvars: true })
   ],
