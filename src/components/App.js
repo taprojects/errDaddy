@@ -14,7 +14,7 @@ import Favicon from 'react-favicon';
 export default function App() {
   return (
     <Router >
-      <Favicon url="../../assets/fav.png" />
+      <Favicon url="../../assets/favicon.ico" />
       <NavBar />
       <Switch>
         <Route exact path="/" component={Splash} />
