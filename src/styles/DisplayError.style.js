@@ -18,6 +18,12 @@ p {
   font-family: ${aldrich};
 }
 
+pre {
+  color: ${mainBlue};
+  margin-left: 15px;
+  font-family: ${aldrich};
+}
+
 .tagList {
   margin-left: 15px;
 }
